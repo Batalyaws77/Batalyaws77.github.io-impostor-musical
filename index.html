@@ -276,6 +276,7 @@
 
 <script>
 const CLIENT_ID = '4185385af9a9464e92e02f19d965f9f4';
+  const CLIENT_SECRET = '58fa7ad326a34b7a9876229067cdc2d5';
 const COLORS = ['#1DB954','#378ADD','#e74c3c','#D4537E','#7F77DD','#f39c12','#1abc9c','#e67e22','#9b59b6','#2ecc71'];
 const EMOJIS = ['🎵','🎤','🥁','🎸','🎹','🎺','🎻','🪗','🪘','🎼'];
 
@@ -300,7 +301,7 @@ async function getToken() {
   const r = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret='
+    body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
   });
   if (!r.ok) throw new Error('No se pudo conectar con Spotify');
   const d = await r.json();
