@@ -178,17 +178,18 @@
   <div class="divider"></div>
 
   <p class="sec-label">🎵 Playlist de los músicos</p>
+  <div class="info-box" style="max-width:420px;margin-bottom:.75rem;font-size:13px">Abre Spotify → entra en la playlist → pulsa los 3 puntos → "Compartir" → "Copiar enlace"</div>
   <div class="add-row">
-    <input type="text" id="pl-search" placeholder="Busca una playlist (ej: pop hits)...">
-    <button class="btn sm outline-green" onclick="searchPlaylists('main')">Buscar</button>
+    <input type="text" id="pl-search" placeholder="Pega el enlace de la playlist...">
+    <button class="btn sm outline-green" onclick="loadPlaylistFromUrl('main')">Cargar</button>
   </div>
   <div id="pl-results-main" class="search-results"></div>
   <div id="pl-selected-main"></div>
 
   <p class="sec-label">🕵️ Playlist del impostor</p>
   <div class="add-row">
-    <input type="text" id="pl-search2" placeholder="Otra playlist diferente (ej: classical)...">
-    <button class="btn sm red" onclick="searchPlaylists('imp')">Buscar</button>
+    <input type="text" id="pl-search2" placeholder="Pega otro enlace diferente...">
+    <button class="btn sm red" onclick="loadPlaylistFromUrl('imp')">Cargar</button>
   </div>
   <div id="pl-results-imp" class="search-results"></div>
   <div id="pl-selected-imp"></div>
@@ -351,6 +352,46 @@ function removePlayer(i) {
   if (state.players.length <= 3) return;
   state.players.splice(i, 1);
   renderPlayers();
+}
+
+function extractPlaylistId(input) {
+  input = input.trim();
+  const patterns = [
+    /spotify\.com\/playlist\/([a-zA-Z0-9]+)/,
+    /spotify:playlist:([a-zA-Z0-9]+)/,
+    /^([a-zA-Z0-9]{22})$/
+  ];
+  for (const p of patterns) { const m = input.match(p); if (m) return m[1]; }
+  return null;
+}
+
+async function loadPlaylistFromUrl(target) {
+  const inputId = target === 'main' ? 'pl-search' : 'pl-search2';
+  const resultsEl = document.getElementById('pl-results-' + target);
+  const raw = document.getElementById(inputId).value.trim();
+  if (!raw) return;
+  const playlistId = extractPlaylistId(raw);
+  if (!playlistId) {
+    resultsEl.innerHTML = '<div class="warn">Pega el enlace completo de Spotify, por ejemplo:<br>https://open.spotify.com/playlist/37i9dQZF1DX...</div>';
+    return;
+  }
+  resultsEl.innerHTML = '<div class="spinner"></div>';
+  try {
+    const data = await spotifyGet('https://api.spotify.com/v1/playlists/' + playlistId + '?fields=id,name,images,tracks(total)');
+    const img = data.images && data.images[0] ? data.images[0].url : '';
+    const name = data.name || 'Playlist';
+    resultsEl.innerHTML = `
+      <div class="sr-item sel" onclick="selectPlaylist('${target}','${data.id}',\`${name.replace(/`/g,'')}\`,'${img}')">
+        <img class="sr-img" src="${img}" alt="">
+        <div class="sr-info">
+          <div class="sr-name">${name}</div>
+          <div class="sr-sub">${data.tracks ? data.tracks.total : '?'} canciones · Toca para seleccionar</div>
+        </div>
+        <span class="sr-check">✓</span>
+      </div>`;
+  } catch(e) {
+    resultsEl.innerHTML = '<div class="warn">No se pudo cargar la playlist. Asegúrate de que es pública.</div>';
+  }
 }
 
 async function searchPlaylists(target) {
@@ -583,8 +624,8 @@ document.getElementById('dur-sl').addEventListener('input', function () {
   document.getElementById('dur-val').textContent = this.value;
 });
 document.getElementById('new-name').addEventListener('keydown', e => { if (e.key === 'Enter') addPlayer(); });
-document.getElementById('pl-search').addEventListener('keydown', e => { if (e.key === 'Enter') searchPlaylists('main'); });
-document.getElementById('pl-search2').addEventListener('keydown', e => { if (e.key === 'Enter') searchPlaylists('imp'); });
+document.getElementById('pl-search').addEventListener('keydown', e => { if (e.key === 'Enter') loadPlaylistFromUrl('main'); });
+document.getElementById('pl-search2').addEventListener('keydown', e => { if (e.key === 'Enter') loadPlaylistFromUrl('imp'); });
 
 renderPlayers();
 </script>
