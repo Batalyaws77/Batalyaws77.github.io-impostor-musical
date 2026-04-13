@@ -244,7 +244,7 @@ async function loginSpotify(){
   const v=await generateCodeVerifier();
   const c=await generateCodeChallenge(v);
   localStorage.setItem('pkce_verifier',v);
-  const p=new URLSearchParams({client_id:CLIENT_ID,response_type:'code',redirect_uri:REDIRECT_URI,code_challenge_method:'S256',code_challenge:c,scope:SCOPES});
+  const p=new URLSearchParams({client_id:CLIENT_ID,response_type:'code',redirect_uri:REDIRECT_URI,code_challenge_method:'S256',code_challenge:c,scope:SCOPES,show_dialog:'true'});
   window.location='https://accounts.spotify.com/authorize?'+p;
 }
 
@@ -264,7 +264,11 @@ async function handleCallback(code){
 async function spotifyGet(url){
   const r=await fetch(url,{headers:{Authorization:'Bearer '+accessToken}});
   if(r.status===401){logoutSpotify();return null;}
-  if(!r.ok)throw new Error('Error Spotify: '+r.status);
+  if(!r.ok){
+    let msg='Error Spotify: '+r.status;
+    try{const e=await r.json();msg+=` — ${e.error&&e.error.message?e.error.message:JSON.stringify(e)}`;}catch(ex){}
+    throw new Error(msg);
+  }
   return r.json();
 }
 
