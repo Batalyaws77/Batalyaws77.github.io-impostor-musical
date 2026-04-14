@@ -6,7 +6,7 @@
 <title>Impostor Musical</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--red:#FF0000;--red-dark:#cc0000;--bad:#e74c3c;--bad-dark:#c0392b;--bg:#0a0a0a;--surface:#141414;--surface2:#1e1e1e;--border:rgba(255,255,255,0.08);--text:#fff;--text2:rgba(255,255,255,0.55);--text3:rgba(255,255,255,0.3);--radius:12px;--font-d:'Bebas Neue',sans-serif;--font-b:'DM Sans',sans-serif}
+  :root{--red:#FF0000;--red-dark:#cc0000;--bad:#e74c3c;--bg:#0a0a0a;--surface:#141414;--surface2:#1e1e1e;--border:rgba(255,255,255,0.08);--text:#fff;--text2:rgba(255,255,255,0.55);--text3:rgba(255,255,255,0.3);--radius:12px;--font-d:'Bebas Neue',sans-serif;--font-b:'DM Sans',sans-serif}
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font-b);overflow-x:hidden}
   body{display:flex;flex-direction:column;min-height:100vh}
@@ -15,8 +15,8 @@
   .logo{font-family:var(--font-d);font-size:48px;letter-spacing:2px;color:#fff;text-align:center;line-height:1;margin-bottom:2px}
   .logo span{color:#FF0000}
   .logo-sub{font-size:12px;color:var(--text2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2rem;text-align:center}
-  h2{font-family:var(--font-d);font-size:32px;letter-spacing:1px;margin-bottom:.35rem;text-align:center;color:var(--text)}
-  .sub{font-size:14px;color:var(--text2);text-align:center;margin-bottom:1.75rem;line-height:1.6}
+  h2{font-family:var(--font-d);font-size:30px;letter-spacing:1px;margin-bottom:.35rem;text-align:center;color:var(--text)}
+  .sub{font-size:14px;color:var(--text2);text-align:center;margin-bottom:1.5rem;line-height:1.6}
   .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.25rem;width:100%;max-width:420px;margin-bottom:.85rem}
   .btn{display:block;width:100%;max-width:420px;padding:15px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--text);font-family:var(--font-b);font-size:15px;font-weight:600;cursor:pointer;text-align:center;margin-bottom:.75rem;transition:all .18s;letter-spacing:.02em}
   .btn:hover{background:rgba(255,255,255,0.06)}
@@ -24,7 +24,7 @@
   .btn.primary{background:#FF0000;color:#fff;border-color:#FF0000}
   .btn.primary:hover{background:#cc0000}
   .btn.danger{background:var(--bad);color:#fff;border-color:var(--bad)}
-  .btn.danger:hover{background:var(--bad-dark)}
+  .btn.ghost{border-color:rgba(255,255,255,0.15);color:var(--text2);font-size:13px;padding:10px}
   .btn.sm{padding:9px 16px;font-size:13px;width:auto;display:inline-block;margin:0}
   input[type=text]{width:100%;padding:12px 14px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:var(--font-b);font-size:15px;outline:none;transition:border .15s}
   input[type=text]:focus{border-color:#FF0000}
@@ -34,21 +34,18 @@
   .player-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:7px;width:100%;max-width:420px}
   .avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
   .pname{flex:1;font-size:15px;color:var(--text)}
+  .pbadge{font-size:11px;padding:2px 8px;border-radius:20px;background:rgba(255,0,0,0.15);color:#FF0000;border:1px solid rgba(255,0,0,0.3)}
   .rmv{background:none;border:none;cursor:pointer;color:var(--text3);font-size:20px;padding:2px 8px;border-radius:6px;transition:color .15s}
   .rmv:hover{color:var(--bad)}
   .add-row{display:flex;gap:8px;width:100%;max-width:420px;margin-bottom:1rem}
   .add-row input{flex:1}
-  .genre-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:420px;margin-bottom:1rem}
-  .genre-btn{padding:12px 10px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text2);font-family:var(--font-b);font-size:13px;font-weight:500;cursor:pointer;text-align:center;transition:all .18s}
+  .genre-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;width:100%;max-width:420px;margin-bottom:.75rem}
+  .genre-btn{padding:10px 6px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text2);font-family:var(--font-b);font-size:12px;font-weight:500;cursor:pointer;text-align:center;transition:all .18s}
   .genre-btn:hover{border-color:rgba(255,255,255,0.2);color:var(--text)}
-  .genre-btn.sel-main{border-color:#FF0000;border-width:2px;background:rgba(255,0,0,0.1);color:#fff}
-  .genre-btn.sel-imp{border-color:#e74c3c;border-width:2px;background:rgba(231,76,60,0.1);color:#fff}
-  .genre-icon{font-size:22px;margin-bottom:5px}
-  .selected-pill{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:10px;margin-bottom:.5rem;width:100%;max-width:420px;font-size:14px;font-weight:500}
-  .selected-pill.main{background:rgba(255,0,0,0.1);border:1px solid rgba(255,0,0,0.3);color:#ff8080}
-  .selected-pill.imp{background:rgba(231,76,60,0.12);border:1px solid rgba(231,76,60,0.3);color:#ffaaaa}
+  .genre-btn.sel{border-color:#FF0000;border-width:2px;background:rgba(255,0,0,0.1);color:#fff}
+  .genre-icon{font-size:20px;margin-bottom:4px}
   .row-slider{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
-  .row-slider .slabel{font-size:13px;color:var(--text2);min-width:140px}
+  .row-slider .slabel{font-size:13px;color:var(--text2);min-width:130px}
   .row-slider .val{font-size:16px;font-weight:600;color:#FF0000;min-width:36px;text-align:right}
   .big-counter{font-family:var(--font-d);font-size:120px;color:#FF0000;line-height:1;margin:1rem 0;text-align:center;animation:pulse-num 1s ease-in-out}
   @keyframes pulse-num{0%{transform:scale(1.3);opacity:0}100%{transform:scale(1);opacity:1}}
@@ -57,7 +54,7 @@
   .prog-fill{height:100%;background:#FF0000;border-radius:2px;transition:width .9s linear}
   .now-playing{width:100%;max-width:420px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;display:flex;align-items:center;gap:14px;margin-bottom:1rem}
   .now-playing img{width:72px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--surface2)}
-  .song-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .song-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .song-channel{font-size:12px;color:var(--text2)}
   .pulse-bars{display:flex;gap:3px;align-items:flex-end;height:20px;margin-top:8px}
   .pulse-bars span{width:3px;border-radius:2px;background:#FF0000;animation:bar-anim 1.1s ease-in-out infinite}
@@ -92,30 +89,51 @@
   .headphone-anim{font-size:64px;text-align:center;animation:float 2.5s ease-in-out infinite;margin:1rem 0}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
   .round-badge{background:rgba(255,0,0,0.15);color:#FF0000;border:1px solid rgba(255,0,0,0.3);border-radius:20px;padding:4px 14px;font-size:13px;font-weight:600;margin-bottom:1.5rem}
+  .room-code{font-family:var(--font-d);font-size:64px;letter-spacing:8px;color:#FF0000;text-align:center;margin:1rem 0;line-height:1}
+  .role-card{width:100%;max-width:420px;border-radius:var(--radius);padding:2rem 1.5rem;text-align:center;margin:1rem 0}
+  .role-card.musico{background:rgba(29,185,84,0.1);border:2px solid rgba(29,185,84,0.4)}
+  .role-card.impostor{background:rgba(231,76,60,0.1);border:2px solid rgba(231,76,60,0.4)}
+  .role-emoji{font-size:52px;margin-bottom:.75rem}
+  .role-name{font-family:var(--font-d);font-size:36px;letter-spacing:2px}
+  .role-name.musico{color:#1DB954}
+  .role-name.impostor{color:#ff6b6b}
+  .role-desc{font-size:13px;color:var(--text2);margin-top:.5rem;line-height:1.6}
   #yt-player-main,#yt-player-imp{position:fixed;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
-  .custom-row{display:flex;gap:8px;width:100%;max-width:420px;margin-top:.5rem}
-  .custom-row input{flex:1;font-size:13px;padding:9px 12px}
+  .join-code-input{font-family:var(--font-d);font-size:36px;letter-spacing:6px;text-align:center;text-transform:uppercase;width:100%;max-width:240px;padding:16px;border-radius:var(--radius);border:2px solid var(--border);background:var(--surface2);color:#FF0000}
+  .join-code-input:focus{border-color:#FF0000;outline:none}
+  .waiting-list{width:100%;max-width:420px}
+  .waiting-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:7px}
+  .online-dot{width:8px;height:8px;border-radius:50%;background:#1DB954;flex-shrink:0}
 </style>
 </head>
 <body>
 
-<!-- SETUP -->
-<div id="s-setup" class="screen active">
-  <div class="logo">Im<span>pos</span>tor</div>
-  <div class="logo-sub">Musical</div>
+<!-- HOME -->
+<div id="s-home" class="screen active">
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%">
+    <div class="logo">Im<span>pos</span>tor</div>
+    <div class="logo-sub">Musical</div>
+    <div style="font-size:60px;margin:1.5rem 0;animation:float 2.5s ease-in-out infinite">🎧</div>
+    <p class="sub">Todos bailan la misma canción...<br>excepto el impostor.</p>
+    <button class="btn primary" onclick="showCreateRoom()">Crear sala (host)</button>
+    <button class="btn" onclick="go('s-join')">Unirse a una sala</button>
+  </div>
+</div>
 
-  <p class="sec-label">Jugadores (3–10)</p>
-  <div id="player-list"></div>
-  <div class="add-row">
-    <input type="text" id="new-name" placeholder="Nombre del jugador..." maxlength="16">
-    <button class="btn sm primary" onclick="addPlayer()">+ Añadir</button>
+<!-- CREATE ROOM -->
+<div id="s-create" class="screen">
+  <div class="logo">Im<span>pos</span>tor</div>
+  <div class="logo-sub">Musical · Nueva sala</div>
+
+  <p class="sec-label">Tu nombre</p>
+  <div class="add-row" style="margin-bottom:1.5rem">
+    <input type="text" id="host-name" placeholder="¿Cómo te llamas?" maxlength="16">
   </div>
 
-  <div class="divider"></div>
-
+  <p class="sec-label">Jugadores esperados</p>
   <div class="card" style="max-width:420px">
     <div class="row-slider">
-      <span class="slabel">Impostores</span>
+      <span class="slabel">Impostores por ronda</span>
       <input type="range" min="1" max="3" value="1" step="1" id="imp-sl" style="flex:1">
       <span class="val" id="imp-val">1</span>
     </div>
@@ -126,52 +144,60 @@
     </div>
   </div>
 
-  <div class="divider"></div>
-
-  <p class="sec-label">🎵 Género para los músicos</p>
-  <p style="font-size:13px;color:var(--text2);width:100%;max-width:420px;margin-bottom:.85rem;line-height:1.5">La app elige una canción aleatoria de ese género cada ronda. ¡Nadie sabe cuál saldrá!</p>
+  <p class="sec-label" style="margin-top:.5rem">🎵 Género para los músicos</p>
   <div class="genre-grid" id="genre-grid-main"></div>
-  <div class="custom-row">
-    <input type="text" id="custom-main" placeholder="O escribe tu propio género...">
-    <button class="btn sm primary" onclick="setCustomGenre('main')">OK</button>
-  </div>
-  <div id="selected-main" style="margin-top:.75rem"></div>
-
-  <div class="divider"></div>
 
   <p class="sec-label">🕵️ Género para el impostor</p>
-  <p style="font-size:13px;color:var(--text2);width:100%;max-width:420px;margin-bottom:.85rem;line-height:1.5">Elige algo muy diferente para que el impostor baile otra cosa.</p>
   <div class="genre-grid" id="genre-grid-imp"></div>
-  <div class="custom-row">
-    <input type="text" id="custom-imp" placeholder="O escribe tu propio género...">
-    <button class="btn sm danger" onclick="setCustomGenre('imp')">OK</button>
-  </div>
-  <div id="selected-imp" style="margin-top:.75rem"></div>
 
-  <div class="divider"></div>
-  <button class="btn primary" onclick="startGame()">Empezar partida</button>
+  <div class="info-box">Los géneros se eligen en secreto — cuando empiece la música nadie sabrá qué canción saldrá, ni tú.</div>
+
+  <button class="btn primary" onclick="createRoom()">Crear sala</button>
+  <button class="btn ghost" onclick="go('s-home')">Volver</button>
 </div>
 
-<!-- LOADING -->
-<div id="s-loading" class="screen">
+<!-- JOIN -->
+<div id="s-join" class="screen">
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%">
-    <div class="logo">Im<span style="color:#FF0000">pos</span>tor</div>
-    <div class="logo-sub">Musical</div>
-    <div class="spinner"></div>
-    <p style="color:var(--text2);font-size:14px;text-align:center" id="load-msg">Buscando canciones aleatorias...</p>
+    <div class="logo">Im<span>pos</span>tor</div>
+    <div class="logo-sub">Musical · Unirse</div>
+    <p class="sub">Introduce el código de sala<br>que te da el host</p>
+    <input class="join-code-input" type="text" id="join-code" placeholder="XXXX" maxlength="4">
+    <div style="height:1rem"></div>
+    <input type="text" id="join-name" placeholder="Tu nombre..." maxlength="16" style="width:100%;max-width:240px;text-align:center;margin-bottom:1rem">
+    <button class="btn primary" onclick="joinRoom()">Entrar</button>
+    <button class="btn ghost" onclick="go('s-home')">Volver</button>
   </div>
 </div>
 
-<!-- READY -->
-<div id="s-ready" class="screen">
-  <div class="round-badge" id="round-badge">Ronda 1</div>
-  <h2>Todo listo</h2>
-  <p class="sub">Roles asignados en secreto.<br>Que todos se pongan los cascos.</p>
-  <div class="headphone-anim">🎧</div>
-  <div class="info-box">Cuando pulses el botón la música arranca en todos los dispositivos a la vez. Nadie sabe qué canción saldrá — ni tú.</div>
-  <div class="warn">No reveles los roles. Los impostores se asignan aleatoriamente cada ronda.</div>
-  <button class="btn primary" onclick="startCountdown()">Todos listos — ¡empezar!</button>
+<!-- LOBBY (host) -->
+<div id="s-lobby" class="screen">
+  <div class="logo">Im<span>pos</span>tor</div>
+  <div class="logo-sub">Musical · Sala</div>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:.25rem">Código de sala — compártelo</p>
+  <div class="room-code" id="room-code-display">----</div>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:1.5rem">Los jugadores entran en la app y ponen este código</p>
+  <p class="sec-label">Jugadores conectados</p>
+  <div class="waiting-list" id="waiting-list"></div>
+  <div class="info-box" style="margin-top:.5rem">Espera a que todos se hayan unido y pulsa empezar.</div>
+  <button class="btn primary" onclick="startRound()" id="start-btn">Empezar partida</button>
+  <button class="btn ghost" onclick="leaveRoom()">Salir</button>
 </div>
+
+<!-- LOBBY (player) -->
+<div id="s-waiting" class="screen">
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%">
+    <div class="headphone-anim">⏳</div>
+    <h2>Esperando...</h2>
+    <p class="sub">El host iniciará la partida<br>cuando todos estén listos.</p>
+    <p class="sec-label">Jugadores en la sala</p>
+    <div class="waiting-list" id="waiting-list-player"></div>
+    <div style="height:1rem"></div>
+    <button class="btn ghost" onclick="leaveRoom()">Salir</button>
+  </div>
+</div>
+
+
 
 <!-- COUNTDOWN -->
 <div id="s-countdown" class="screen">
@@ -186,18 +212,11 @@
 <div id="s-playing" class="screen">
   <div class="round-badge" id="round-badge-play">Ronda 1</div>
   <h2>Bailando</h2>
-  <p class="sub">El impostor intenta disimular...</p>
-  <div class="now-playing">
-    <img id="song-img" src="" alt="">
-    <div style="min-width:0;flex:1">
-      <div class="song-title" id="song-title">Cargando...</div>
-      <div class="song-channel" id="song-channel">...</div>
-      <div class="pulse-bars"><span></span><span></span><span></span><span></span><span></span></div>
-    </div>
-  </div>
+  <p class="sub" id="play-sub">El impostor intenta disimular...</p>
+  <div style="font-size:72px;text-align:center;animation:float 2.5s ease-in-out infinite;margin:1rem 0">🎧</div>
   <div class="prog-bar"><div class="prog-fill" id="play-fill" style="width:100%"></div></div>
   <div class="play-counter" id="play-counter">25</div>
-  <p style="font-size:13px;color:var(--text3);text-align:center;margin-top:auto;padding-top:1rem">Los músicos ven esta canción. El impostor ve una diferente.</p>
+  <p style="font-size:13px;color:var(--text3);text-align:center;margin-top:auto">Cada jugador escucha en su propio móvil</p>
 </div>
 
 <!-- VOTE -->
@@ -208,7 +227,8 @@
   <div class="reveal-grid" id="song-reveal"></div>
   <p class="sec-label">Votad al sospechoso</p>
   <div class="vote-grid" id="vote-grid"></div>
-  <button class="btn primary" onclick="revealResult()">Revelar resultado</button>
+  <button class="btn primary" id="reveal-btn" onclick="castVote()" style="display:none">Confirmar voto</button>
+  <div id="vote-status" style="font-size:13px;color:var(--text2);text-align:center;margin-top:.5rem"></div>
 </div>
 
 <!-- RESULT -->
@@ -218,103 +238,135 @@
   <div class="result-title" id="res-title">¡Atrapado!</div>
   <p class="sub" id="res-detail" style="margin-bottom:1.5rem"></p>
   <div class="divider"></div>
+  <div class="reveal-grid" id="song-reveal-result" style="margin-bottom:.5rem"></div>
   <p class="sec-label">Puntuación acumulada</p>
   <div id="score-list"></div>
   <div style="height:1.5rem"></div>
-  <button class="btn primary" onclick="nextRound()">Siguiente ronda</button>
-  <button class="btn" onclick="resetAll()">Nueva partida</button>
+  <button class="btn primary" id="next-round-btn" style="display:none" onclick="hostNextRound()">Siguiente ronda</button>
+  <button class="btn ghost" onclick="leaveRoom()">Salir</button>
+</div>
+
+<!-- Loading -->
+<div id="s-loading" class="screen">
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%">
+    <div class="logo">Im<span style="color:#FF0000">pos</span>tor</div>
+    <div class="logo-sub">Musical</div>
+    <div class="spinner"></div>
+    <p style="color:var(--text2);font-size:14px;text-align:center" id="load-msg">Cargando...</p>
+  </div>
 </div>
 
 <div id="yt-player-main"></div>
 <div id="yt-player-imp"></div>
 
-<script>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, set, get, update, onValue, off, push, remove } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
+const firebaseConfig={
+  apiKey:"AIzaSyBIJdRMd3DfKrOZLXyyRr_1S4rt_EsRf6c",
+  authDomain:"impostor-musical.firebaseapp.com",
+  databaseURL:"https://impostor-musical-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId:"impostor-musical",
+  storageBucket:"impostor-musical.firebasestorage.app",
+  messagingSenderId:"102546675042",
+  appId:"1:102546675042:web:783a2fa0e6be0258c6883b"
+};
+
+const app=initializeApp(firebaseConfig);
+const db=getDatabase(app);
+
 const YT_API_KEY='AIzaSyD9iqTXMPjBrn0foTVMPzl7RX4iWXvOerA';
 const COLORS=['#FF0000','#378ADD','#e74c3c','#D4537E','#7F77DD','#f39c12','#1abc9c','#e67e22','#9b59b6','#2ecc71'];
 const EMOJIS=['🎵','🎤','🥁','🎸','🎹','🎺','🎻','🪗','🪘','🎼'];
 
 const GENRES=[
-  {label:'Reggaeton',icon:'🔥',query:'reggaeton hits'},
-  {label:'Pop',icon:'⭐',query:'pop hits 2024'},
-  {label:'Rock',icon:'🎸',query:'rock clasico hits'},
-  {label:'Electrónica',icon:'🎛️',query:'electronic dance music hits'},
-  {label:'Flamenco',icon:'💃',query:'flamenco español'},
-  {label:'Hip Hop',icon:'🎤',query:'hip hop hits'},
-  {label:'Salsa',icon:'🎺',query:'salsa bailar'},
-  {label:'Bachata',icon:'🌹',query:'bachata romantica'},
+  {label:'Reggaeton',icon:'🔥',query:'reggaeton hits bailar'},
+  {label:'Pop',icon:'⭐',query:'pop hits 2024 musica'},
+  {label:'Rock',icon:'🎸',query:'rock clasico exitos'},
+  {label:'Electrónica',icon:'🎛️',query:'electronic dance music'},
+  {label:'Flamenco',icon:'💃',query:'flamenco español baile'},
+  {label:'Hip Hop',icon:'🎤',query:'hip hop rap hits'},
+  {label:'Salsa',icon:'🎺',query:'salsa musica bailar'},
+  {label:'Bachata',icon:'🌹',query:'bachata romantica baile'},
   {label:'Clásica',icon:'🎻',query:'musica clasica famosa'},
   {label:'Metal',icon:'🤘',query:'heavy metal hits'},
-  {label:'Jazz',icon:'🎷',query:'jazz classics'},
-  {label:'Cumbia',icon:'🪘',query:'cumbia bailar'},
+  {label:'Jazz',icon:'🎷',query:'jazz classics musica'},
+  {label:'Cumbia',icon:'🪘',query:'cumbia bailar musica'},
 ];
 
-let ytMainPlayer=null,ytImpPlayer=null,ytAPIReady=false;
-let state={
-  players:['Ana','Borja','Carlos','Diana'],
-  numImpostors:1,duration:25,scores:{},round:0,
-  impostors:[],mainGenre:null,impGenre:null,
-  mainSong:null,impSong:null,vote:null
-};
+let myId=null, myName='', roomCode=null, isHost=false;
+let myRole=null, myVideoId=null;
+let roomRef=null, roomListener=null;
+let ytPlayer=null, ytReady=false;
+let playTimer=null;
+let myVote=null;
+let selectedMainGenre=null, selectedImpGenre=null;
 
 window.onYouTubeIframeAPIReady=function(){
-  ytAPIReady=true;
-  ytMainPlayer=new YT.Player('yt-player-main',{height:'1',width:'1',playerVars:{autoplay:0,controls:0,disablekb:1,fs:0,modestbranding:1,playsinline:1}});
-  ytImpPlayer=new YT.Player('yt-player-imp',{height:'1',width:'1',playerVars:{autoplay:0,controls:0,disablekb:1,fs:0,modestbranding:1,playsinline:1}});
+  ytReady=true;
+  ytPlayer=new YT.Player('yt-player-main',{
+    height:'1',width:'1',
+    playerVars:{autoplay:0,controls:0,disablekb:1,fs:0,modestbranding:1,playsinline:1}
+  });
 };
-const tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag);
+const ytTag=document.createElement('script');
+ytTag.src='https://www.youtube.com/iframe_api';
+document.head.appendChild(ytTag);
+
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+window.go=go;
+
+function genCode(){
+  return Math.random().toString(36).substring(2,6).toUpperCase();
+}
+
+function myIdKey(){
+  if(!myId) myId=Date.now().toString(36)+Math.random().toString(36).substring(2,5);
+  return myId;
+}
 
 function renderGenreGrids(){
   ['main','imp'].forEach(target=>{
     document.getElementById('genre-grid-'+target).innerHTML=GENRES.map((g,i)=>`
-      <div class="genre-btn" id="gb-${target}-${i}" onclick="selectGenre('${target}',${i})">
+      <div class="genre-btn" id="gb-${target}-${i}" onclick="window.selectGenre('${target}',${i})">
         <div class="genre-icon">${g.icon}</div>
         <div>${g.label}</div>
       </div>`).join('');
   });
 }
 
-function selectGenre(target,idx){
+window.selectGenre=function(target,idx){
   const g=GENRES[idx];
   if(target==='main'){
-    state.mainGenre=g;
-    document.querySelectorAll('[id^="gb-main-"]').forEach(el=>el.classList.remove('sel-main'));
-    document.getElementById('gb-main-'+idx).classList.add('sel-main');
-    document.getElementById('selected-main').innerHTML=`<div class="selected-pill main">🎵 Músicos bailarán: <strong>${g.label}</strong></div>`;
-    document.getElementById('custom-main').value='';
+    selectedMainGenre=g;
+    document.querySelectorAll('[id^="gb-main-"]').forEach(el=>el.classList.remove('sel'));
+    document.getElementById('gb-main-'+idx).classList.add('sel');
   } else {
-    state.impGenre=g;
-    document.querySelectorAll('[id^="gb-imp-"]').forEach(el=>el.classList.remove('sel-imp'));
-    document.getElementById('gb-imp-'+idx).classList.add('sel-imp');
-    document.getElementById('selected-imp').innerHTML=`<div class="selected-pill imp">🕵️ Impostor bailará: <strong>${g.label}</strong></div>`;
-    document.getElementById('custom-imp').value='';
+    selectedImpGenre=g;
+    document.querySelectorAll('[id^="gb-imp-"]').forEach(el=>el.classList.remove('sel'));
+    document.getElementById('gb-imp-'+idx).classList.add('sel');
   }
-}
+};
 
-function setCustomGenre(target){
-  const val=document.getElementById('custom-'+target).value.trim();
-  if(!val)return;
-  const g={label:val,icon:'🎵',query:val+' music hits'};
-  if(target==='main'){
-    state.mainGenre=g;
-    document.querySelectorAll('[id^="gb-main-"]').forEach(el=>el.classList.remove('sel-main'));
-    document.getElementById('selected-main').innerHTML=`<div class="selected-pill main">🎵 Músicos bailarán: <strong>${val}</strong></div>`;
-  } else {
-    state.impGenre=g;
-    document.querySelectorAll('[id^="gb-imp-"]').forEach(el=>el.classList.remove('sel-imp'));
-    document.getElementById('selected-imp').innerHTML=`<div class="selected-pill imp">🕵️ Impostor bailará: <strong>${val}</strong></div>`;
-  }
-}
+window.showCreateRoom=function(){
+  renderGenreGrids();
+  go('s-create');
+};
 
 async function getRandomSong(genre){
-  const offset=Math.floor(Math.random()*40);
-  const queries=[genre.query, genre.label+' music', genre.label+' bailar'];
+  const queries=[genre.query, genre.label+' musica', genre.label+' baile hits'];
   const q=queries[Math.floor(Math.random()*queries.length)];
   const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(q)}&type=video&videoCategoryId=10&maxResults=10&key=${YT_API_KEY}`;
   const r=await fetch(url);
   const data=await r.json();
-  if(data.error)throw new Error(data.error.message);
+  if(data.error) throw new Error(data.error.message);
   const items=(data.items||[]).filter(i=>i.id&&i.id.videoId);
-  if(!items.length)throw new Error('No se encontraron canciones para '+genre.label);
+  if(!items.length) throw new Error('Sin resultados para '+genre.label);
   const item=items[Math.floor(Math.random()*items.length)];
   return{
     videoId:item.id.videoId,
@@ -324,162 +376,322 @@ async function getRandomSong(genre){
   };
 }
 
-function go(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('s-'+id).classList.add('active');
-  window.scrollTo(0,0);
-}
+window.createRoom=async function(){
+  const name=document.getElementById('host-name').value.trim();
+  if(!name){alert('Escribe tu nombre.');return;}
+  if(!selectedMainGenre){alert('Selecciona un género para los músicos.');return;}
+  if(!selectedImpGenre){alert('Selecciona un género para el impostor.');return;}
+  if(selectedMainGenre.label===selectedImpGenre.label){alert('Los géneros deben ser diferentes.');return;}
+  const numImpostors=parseInt(document.getElementById('imp-sl').value);
+  const duration=parseInt(document.getElementById('dur-sl').value);
+  go('s-loading');
+  document.getElementById('load-msg').textContent='Creando sala...';
+  try{
+    const code=genCode();
+    myName=name; isHost=true; roomCode=code;
+    myId=myIdKey();
+    const roomData={
+      code, host:myId, status:'lobby',
+      numImpostors, duration, round:0, scores:{},
+      mainGenre:selectedMainGenre, impGenre:selectedImpGenre,
+      players:{[myId]:{name, id:myId, connected:true}}
+    };
+    await set(ref(db,'rooms/'+code), roomData);
+    document.getElementById('room-code-display').textContent=code;
+    listenRoom(code);
+    go('s-lobby');
+  }catch(e){go('s-create');alert('Error: '+e.message);}
+};
 
-function setBadges(){
-  ['round-badge','round-badge-play','round-badge-vote','round-badge-result'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.textContent='Ronda '+state.round;
+window.joinRoom=async function(){
+  const code=document.getElementById('join-code').value.trim().toUpperCase();
+  const name=document.getElementById('join-name').value.trim();
+  if(code.length!==4){alert('Introduce un código de 4 letras.');return;}
+  if(!name){alert('Escribe tu nombre.');return;}
+  go('s-loading');
+  document.getElementById('load-msg').textContent='Buscando sala...';
+  try{
+    const snap=await get(ref(db,'rooms/'+code));
+    if(!snap.exists()){go('s-join');alert('Sala no encontrada. Comprueba el código.');return;}
+    const room=snap.val();
+    if(room.status!=='lobby'){go('s-join');alert('La partida ya ha empezado.');return;}
+    myName=name; isHost=false; roomCode=code;
+    myId=myIdKey();
+    await update(ref(db,'rooms/'+code+'/players/'+myId),{name,id:myId,connected:true});
+    listenRoom(code);
+    go('s-waiting');
+  }catch(e){go('s-join');alert('Error: '+e.message);}
+};
+
+function listenRoom(code){
+  if(roomListener){off(ref(db,'rooms/'+code));roomListener=null;}
+  roomRef=ref(db,'rooms/'+code);
+  roomListener=onValue(roomRef, snap=>{
+    if(!snap.exists()){leaveRoom();return;}
+    const room=snap.val();
+    handleRoomUpdate(room);
   });
 }
 
-function renderPlayers(){
-  document.getElementById('player-list').innerHTML=state.players.map((p,i)=>`
-    <div class="player-item">
-      <div class="avatar" style="background:${COLORS[i]}22;color:${COLORS[i]}">${EMOJIS[i]}</div>
-      <span class="pname">${p}</span>
-      <button class="rmv" onclick="removePlayer(${i})">×</button>
+function handleRoomUpdate(room){
+  updateWaitingLists(room);
+  if(room.status==='lobby'){
+    if(!isHost && document.getElementById('s-lobby').classList.contains('active')) go('s-waiting');
+  }
+  if(room.status==='starting'){
+    handleStarting(room);
+  }
+  if(room.status==='playing'){
+    handlePlaying(room);
+  }
+  if(room.status==='voting'){
+    handleVoting(room);
+  }
+  if(room.status==='result'){
+    handleResult(room);
+  }
+}
+
+function updateWaitingLists(room){
+  const players=Object.values(room.players||{});
+  const html=players.map((p,i)=>`
+    <div class="waiting-item">
+      <div class="online-dot"></div>
+      <div class="avatar" style="background:${COLORS[i%COLORS.length]}22;color:${COLORS[i%COLORS.length]};width:28px;height:28px;font-size:13px;flex-shrink:0">${EMOJIS[i%EMOJIS.length]}</div>
+      <span style="font-size:14px;color:var(--text)">${p.name}</span>
+      ${p.id===room.host?'<span class="pbadge">host</span>':''}
     </div>`).join('');
+  const el1=document.getElementById('waiting-list');
+  const el2=document.getElementById('waiting-list-player');
+  if(el1)el1.innerHTML=html;
+  if(el2)el2.innerHTML=html;
 }
 
-function addPlayer(){
-  const inp=document.getElementById('new-name');const n=inp.value.trim();
-  if(!n||state.players.length>=10)return;
-  state.players.push(n);inp.value='';renderPlayers();
-}
-function removePlayer(i){if(state.players.length<=3)return;state.players.splice(i,1);renderPlayers();}
-
-function startGame(){
-  if(state.players.length<3){alert('Necesitas al menos 3 jugadores.');return;}
-  if(!state.mainGenre){alert('Selecciona un género para los músicos.');return;}
-  if(!state.impGenre){alert('Selecciona un género para el impostor.');return;}
-  if(state.mainGenre.label===state.impGenre.label){alert('Los géneros deben ser diferentes.');return;}
-  state.scores={};state.players.forEach(p=>state.scores[p]=0);state.round=0;
-  prepareRound();
+function handleStarting(room){
+  const cur=document.querySelector('.screen.active');
+  if(cur&&(cur.id==='s-lobby'||cur.id==='s-waiting'||cur.id==='s-result')){
+    myRole=room.roles&&room.roles[myId]?room.roles[myId]:'musico';
+    myVideoId=room.videos&&room.videos[myId]?room.videos[myId]:null;
+    showRole();
+  }
 }
 
-async function prepareRound(){
-  state.round++;setBadges();go('loading');
-  document.getElementById('load-msg').textContent='Eligiendo canción aleatoria para los músicos...';
-  try{
-    const shuffled=[...state.players].sort(()=>Math.random()-.5);
-    state.impostors=shuffled.slice(0,state.numImpostors);
-    state.vote=null;
-    state.mainSong=await getRandomSong(state.mainGenre);
-    document.getElementById('load-msg').textContent='Eligiendo canción aleatoria para el impostor...';
-    let impSong=null,attempts=0;
-    while(attempts<5){
-      const s=await getRandomSong(state.impGenre);
-      if(s.videoId!==state.mainSong.videoId){impSong=s;break;}
-      attempts++;
-    }
-    state.impSong=impSong||await getRandomSong(state.impGenre);
-    go('ready');
-  }catch(e){go('setup');alert('Error buscando canciones: '+e.message);}
+function showRole(){
+  startCountdown();
 }
 
 function startCountdown(){
-  go('countdown');let n=3;
+  go('s-countdown');
+  let n=3;
   document.getElementById('countdown-num').textContent=n;
   const iv=setInterval(()=>{
     n--;
     if(n>0){
       const el=document.getElementById('countdown-num');
       el.textContent=n;el.style.animation='none';void el.offsetWidth;el.style.animation='pulse-num 1s ease-in-out';
-    }else{clearInterval(iv);playRound();}
+    }else{clearInterval(iv);startPlaying();}
   },1000);
 }
 
-let playTimer=null;
-function playRound(){
-  stopAudios();
-  document.getElementById('song-img').src=state.mainSong.thumb;
-  document.getElementById('song-title').textContent=state.mainSong.title;
-  document.getElementById('song-channel').textContent=state.mainSong.channel;
-  go('playing');
-  if(ytMainPlayer&&ytMainPlayer.loadVideoById){ytMainPlayer.loadVideoById(state.mainSong.videoId);ytMainPlayer.playVideo();}
-  if(ytImpPlayer&&ytImpPlayer.loadVideoById){ytImpPlayer.loadVideoById(state.impSong.videoId);ytImpPlayer.playVideo();}
-  let secs=state.duration;
+function handlePlaying(room){
+  const cur=document.querySelector('.screen.active');
+  if(cur&&cur.id!=='s-playing'&&cur.id!=='s-role'&&cur.id!=='s-countdown'){
+    startPlaying();
+  }
+}
+
+function startPlaying(){
+  go('s-playing');
+  if(!myVideoId)return;
+  if(ytPlayer&&ytPlayer.loadVideoById){
+    ytPlayer.loadVideoById(myVideoId);
+    ytPlayer.playVideo();
+  }
+  const duration=window._lastRoom&&window._lastRoom.duration?window._lastRoom.duration:25;
+  document.getElementById('round-badge-play').textContent='Ronda '+(window._lastRoom&&window._lastRoom.round||1);
+  let secs=duration;
   document.getElementById('play-fill').style.width='100%';
   document.getElementById('play-counter').textContent=secs;
   if(playTimer)clearInterval(playTimer);
   playTimer=setInterval(()=>{
     secs--;
     document.getElementById('play-counter').textContent=secs;
-    document.getElementById('play-fill').style.width=Math.round(secs/state.duration*100)+'%';
-    if(secs<=0){clearInterval(playTimer);stopAudios();showVote();}
+    document.getElementById('play-fill').style.width=Math.round(secs/duration*100)+'%';
+    if(secs<=0){clearInterval(playTimer);stopAudio();}
   },1000);
 }
 
-function stopAudios(){
-  try{if(ytMainPlayer&&ytMainPlayer.stopVideo)ytMainPlayer.stopVideo();}catch(e){}
-  try{if(ytImpPlayer&&ytImpPlayer.stopVideo)ytImpPlayer.stopVideo();}catch(e){}
+function stopAudio(){
+  try{if(ytPlayer&&ytPlayer.stopVideo)ytPlayer.stopVideo();}catch(e){}
 }
 
-function showVote(){
-  document.getElementById('song-reveal').innerHTML=`
-    <div class="reveal-card">
-      <div class="reveal-tag main">Músicos escucharon</div>
-      <img src="${state.mainSong.thumb}" alt="">
-      <div class="reveal-title">${state.mainSong.title}</div>
-    </div>
-    <div class="reveal-card">
-      <div class="reveal-tag imp">Impostor escuchó</div>
-      <img src="${state.impSong.thumb}" alt="">
-      <div class="reveal-title">${state.impSong.title}</div>
-    </div>`;
-  document.getElementById('vote-grid').innerHTML=state.players.map((p,i)=>`
-    <div class="vote-btn" onclick="selectVote('${p}',this)">
+function handleVoting(room){
+  if(playTimer){clearInterval(playTimer);playTimer=null;}
+  stopAudio();
+  const cur=document.querySelector('.screen.active');
+  if(cur&&cur.id==='s-vote')return;
+  myVote=null;
+  document.getElementById('round-badge-vote').textContent='Ronda '+(room.round||1);
+  document.getElementById('song-reveal').innerHTML='';
+  const players=Object.values(room.players||{});
+  document.getElementById('vote-grid').innerHTML=players.map((p,i)=>`
+    <div class="vote-btn" onclick="window.selectVote('${p.id}',this)">
       <div class="vote-icon">${EMOJIS[i%EMOJIS.length]}</div>
-      <div>${p}</div>
+      <div>${p.name}</div>
     </div>`).join('');
-  go('vote');
+  document.getElementById('reveal-btn').style.display='block';
+  updateVoteStatus(room);
+  go('s-vote');
 }
 
-function selectVote(p,el){
+window.selectVote=function(pid,el){
   document.querySelectorAll('.vote-btn').forEach(b=>b.classList.remove('sel'));
-  el.classList.add('sel');state.vote=p;
+  el.classList.add('sel');
+  myVote=pid;
+};
+
+window.castVote=async function(){
+  if(!myVote){alert('Selecciona a alguien.');return;}
+  await update(ref(db,'rooms/'+roomCode+'/votes/'+myId),{vote:myVote});
+  document.getElementById('reveal-btn').style.display='none';
+  document.getElementById('vote-status').textContent='Voto registrado. Esperando a los demás...';
+};
+
+function updateVoteStatus(room){
+  const players=Object.values(room.players||{});
+  const votes=Object.values(room.votes||{});
+  document.getElementById('vote-status').textContent=`${votes.length}/${players.length} han votado`;
+  if(isHost&&votes.length===players.length){
+    computeResult(room);
+  }
 }
 
-function revealResult(){
-  if(!state.vote){alert('Selecciona a alguien antes de revelar.');return;}
-  const caught=state.impostors.includes(state.vote);
+async function computeResult(room){
+  const votes=Object.values(room.votes||{});
+  const tally={};
+  votes.forEach(v=>{tally[v.vote]=(tally[v.vote]||0)+1;});
+  const topId=Object.entries(tally).sort((a,b)=>b[1]-a[1])[0][0];
+  const impostors=room.impostors||[];
+  const caught=impostors.includes(topId);
+  const scores=room.scores||{};
+  const players=Object.values(room.players||{});
+  if(caught){
+    players.filter(p=>!impostors.includes(p.id)).forEach(p=>scores[p.id]=(scores[p.id]||0)+2);
+  } else {
+    impostors.forEach(id=>scores[id]=(scores[id]||0)+3);
+  }
+  await update(ref(db,'rooms/'+roomCode),{
+    status:'result', votedOut:topId, caught, scores, votes:null
+  });
+}
+
+function handleResult(room){
+  if(playTimer){clearInterval(playTimer);playTimer=null;}
+  const caught=room.caught;
+  const votedOut=room.votedOut;
+  const players=Object.values(room.players||{});
+  const votedPlayer=players.find(p=>p.id===votedOut);
+  const impostors=room.impostors||[];
+  const impostorNames=players.filter(p=>impostors.includes(p.id)).map(p=>p.name);
+  document.getElementById('round-badge-result').textContent='Ronda '+(room.round||1);
   document.getElementById('res-icon').textContent=caught?'🎯':'🕵️';
   const t=document.getElementById('res-title');
   t.textContent=caught?'¡Atrapado!':'Se escapa';
   t.className='result-title '+(caught?'win':'lose');
   document.getElementById('res-detail').textContent=caught
-    ?`${state.vote} era el impostor. Los músicos ganan 2 puntos.`
-    :`El impostor era: ${state.impostors.join(', ')}. Gana 3 puntos.`;
-  if(caught){state.players.filter(p=>!state.impostors.includes(p)).forEach(p=>state.scores[p]=(state.scores[p]||0)+2);}
-  else{state.impostors.forEach(p=>state.scores[p]=(state.scores[p]||0)+3);}
-  const sorted=[...state.players].sort((a,b)=>(state.scores[b]||0)-(state.scores[a]||0));
+    ?`${votedPlayer?votedPlayer.name:'?'} era el impostor. Los músicos ganan 2 puntos.`
+    :`El impostor era: ${impostorNames.join(', ')}. Gana 3 puntos.`;
+  const scores=room.scores||{};
+  const sorted=[...players].sort((a,b)=>(scores[b.id]||0)-(scores[a.id]||0));
   document.getElementById('score-list').innerHTML=sorted.map((p,i)=>{
-    const isImp=state.impostors.includes(p);
-    return`<div class="score-item"><span>${i===0?'🥇':i===1?'🥈':i===2?'🥉':'  '} ${p}${isImp?' 🕵️':''}</span><span class="score-pts ${isImp?'imp':''}">${state.scores[p]||0} pts</span></div>`;
+    const isImp=impostors.includes(p.id);
+    return`<div class="score-item"><span>${i===0?'🥇':i===1?'🥈':i===2?'🥉':'  '} ${p.name}${isImp?' 🕵️':''}</span><span class="score-pts ${isImp?'imp':''}">${scores[p.id]||0} pts</span></div>`;
   }).join('');
-  go('result');
+  const songData=room.songData;
+  if(songData){
+    document.getElementById('song-reveal-result').innerHTML=`
+      <div class="reveal-card">
+        <div class="reveal-tag main">Músicos escucharon</div>
+        <img src="${songData.main.thumb}" alt="">
+        <div class="reveal-title">${songData.main.title}</div>
+      </div>
+      <div class="reveal-card">
+        <div class="reveal-tag imp">Impostor escuchó</div>
+        <img src="${songData.imp.thumb}" alt="">
+        <div class="reveal-title">${songData.imp.title}</div>
+      </div>`;
+  }
+  document.getElementById('next-round-btn').style.display=isHost?'block':'none';
+  go('s-result');
 }
 
-async function nextRound(){await prepareRound();}
+window.hostNextRound=async function(){
+  await update(ref(db,'rooms/'+roomCode),{status:'lobby', roles:null, videos:null, impostors:null, songData:null, votes:null, votedOut:null, caught:null});
+};
 
-function resetAll(){
-  stopAudios();if(playTimer)clearInterval(playTimer);
-  state={...state,scores:{},round:0,impostors:[],mainSong:null,impSong:null,vote:null};
-  go('setup');
-}
+window.startRound=async function(){
+  const snap=await get(ref(db,'rooms/'+roomCode));
+  if(!snap.exists())return;
+  const room=snap.val();
+  const players=Object.values(room.players||{});
+  if(players.length<3){alert('Necesitas al menos 3 jugadores.');return;}
+  go('s-loading');
+  document.getElementById('load-msg').textContent='Eligiendo canciones aleatorias...';
+  try{
+    const mainSong=await getRandomSong(room.mainGenre);
+    const impSong=await getRandomSong(room.impGenre);
+    const shuffled=[...players].sort(()=>Math.random()-.5);
+    const numImpostors=room.numImpostors||1;
+    const impostorIds=shuffled.slice(0,numImpostors).map(p=>p.id);
+    const roles={}, videos={};
+    players.forEach(p=>{
+      const isImp=impostorIds.includes(p.id);
+      roles[p.id]=isImp?'impostor':'musico';
+      videos[p.id]=isImp?impSong.videoId:mainSong.videoId;
+    });
+    const round=(room.round||0)+1;
+    await update(ref(db,'rooms/'+roomCode),{
+      status:'starting', roles, videos, impostors:impostorIds,
+      songData:{main:mainSong, imp:impSong}, round,
+      votes:null, votedOut:null, caught:null
+    });
+    setTimeout(async()=>{
+      await update(ref(db,'rooms/'+roomCode),{status:'playing'});
+    },4000);
+  }catch(e){
+    go('s-lobby');alert('Error: '+e.message);
+  }
+};
 
-document.getElementById('imp-sl').addEventListener('input',function(){state.numImpostors=parseInt(this.value);document.getElementById('imp-val').textContent=this.value;});
-document.getElementById('dur-sl').addEventListener('input',function(){state.duration=parseInt(this.value);document.getElementById('dur-val').textContent=this.value;});
-document.getElementById('new-name').addEventListener('keydown',e=>{if(e.key==='Enter')addPlayer()});
-document.getElementById('custom-main').addEventListener('keydown',e=>{if(e.key==='Enter')setCustomGenre('main')});
-document.getElementById('custom-imp').addEventListener('keydown',e=>{if(e.key==='Enter')setCustomGenre('imp')});
+window.leaveRoom=async function(){
+  if(roomRef)off(roomRef);
+  if(roomCode&&myId){
+    try{
+      if(isHost){await remove(ref(db,'rooms/'+roomCode));}
+      else{await remove(ref(db,'rooms/'+roomCode+'/players/'+myId));}
+    }catch(e){}
+  }
+  roomCode=null; myId=null; myName=''; isHost=false; myRole=null; myVideoId=null;
+  if(playTimer){clearInterval(playTimer);playTimer=null;}
+  stopAudio();
+  go('s-home');
+};
 
-renderPlayers();
-renderGenreGrids();
+const origOnValue=onValue;
+const _onValue=function(r,cb){
+  return origOnValue(r,snap=>{
+    if(snap.exists()&&snap.val()&&snap.val().songData){
+      window._lastRoom=snap.val();
+    } else if(snap.exists()){
+      window._lastRoom=snap.val();
+    }
+    cb(snap);
+  });
+};
+
+document.getElementById('imp-sl').addEventListener('input',function(){document.getElementById('imp-val').textContent=this.value;});
+document.getElementById('dur-sl').addEventListener('input',function(){document.getElementById('dur-val').textContent=this.value;});
+document.getElementById('join-code').addEventListener('input',function(){this.value=this.value.toUpperCase();});
 </script>
 </body>
 </html>
